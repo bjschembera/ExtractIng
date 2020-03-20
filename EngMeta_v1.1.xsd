@@ -1,0 +1,1376 @@
+<!--
+		 Metadata keys that need to be processed, as from the EngMeta metadata model.
+		 Therefore, the keys have to be flattened out.
+
+
+
+ # Contact
+ #
+ # Name and contact information of a person or
+ # organization that can handle requiries about the data over a long
+ # time period. Role can be one of the following values: ContactPerson, DataCollector,
+ # DataCurator, DataManager, Distributor, Editor, HostingInstitution", Other, Producer, 
+ # ProjectLeader, ProjectManager. ProjectMember, RegistrationAgency, RegistrationAuthority, 
+ # RelatedPerson, ResearchGroup, RightsHolder, Researcher, Sponsor, Supervisor, WorkPackageLeader
+ contact.name
+ contact.givenName
+ contact.familyName
+ contact.address
+ contact.affiliation.name
+ contact.affiliation.givenName
+ contact.affiliation.familyName
+ contact.affiliation.address
+ contact.affiliation.email
+ contact.affiliation.id
+ contact.affiliation.role
+ contact.email
+ contact.id
+ contact.role 
+ 
+ # Creator
+ #
+ # Name and affiliation of the author(s) of the
+ # data. These are the persons who created the data.
+ # Can be the same as the contact
+ creator.name
+ creator.givenName
+ creator.familyName
+ creator.address
+ creator.affiliation.name
+ creator.affiliation.givenName
+ creator.affiliation.familyName
+ creator.affiliation.address
+ creator.affiliation.email
+ creator.affiliation.id
+ creator.affiliation.role
+ creator.email
+ creator.id
+ creator.role
+ 
+ # Contributor
+ #
+ # Name and affiliation of all persons who
+ # contributed to the data.
+ contributor.name
+ contributor.givenName
+ contributor.familyName
+ contributor.address
+ contributor.affiliation.name
+ contributor.affiliation.givenName
+ contributor.affiliation.familyName
+ contributor.affiliation.address
+ contributor.affiliation.email
+ contributor.affiliation.id
+ contributor.affiliation.role
+ contributor.email
+ contributor.id
+ contributor.role
+ 
+ # Project
+ # 
+ # Name of the (sub)-project as context of the data 
+ # Value is a string description, level is an integer for the level (main project: level=0, subproject: level=1, subsubproject: level=2)
+ project.value
+ project.level
+ 
+ # Funding Information
+ #
+ # Uniquely identifies a funding entity, according to various types.
+ # funderIdentifier can be one of: ISNI, GRID, Crossref Funder ID, Other
+ fundingReference.funderName
+ fundingReference.funderIdentifier 
+ fundingReference.awardNumber
+ fundingReference.awardNumber.URI
+ fundingReference.awardTitle
+ 
+ # Worked
+ #
+ # Flag, if the data belongs to a successful or unsuccessful research
+ # Can have the values: true, false
+ worked
+ 
+ # Worked Note
+ #
+ # Description, why the research was (un-)successful.
+ 		 
+ workedNote
+ 
+ # Title 
+ #
+ # A name or title by which a resource is known. titleType can be one of: 
+ # AlternativeTitle, Subtitle, TranslatedTitle, Other
+ title
+ title.titleType
+ title.lang
+ 
+ 
+ # Description
+ #
+ # All additional information that does not fit in any of the other categories. 
+ # May be used for technical information. It is a best practice to supply a description.
+ # descriptionType can be: Abstract, Methods, SeriesInformation, TableOfContents, TechnicalInfo, Other
+ # lang specifies the language of the description text as defined in http://www.rfc-editor.org/rfc/bcp/bcp47.txt
+ description
+ description.descriptionType
+ description.lang
+ 
+ # Resource Type
+ #
+ # The type of a resource. You may enter an additional free text description.
+ # The format is open, but the preferred format is a single term of some detail so 
+ # that a pair can be formed with the sub-property. ResourceType can be one of:
+ #  Audiovisual, Collection, Dataset, Event, Image, InteractiveResource, Model, PhysicalObject, Service,
+ # Software, Sound, Text, Workflow, Other
+resourceType
+resourceType.resourceTypeGeneral
+
+ # Keywords
+ #
+ # List of describing keywords. 
+ keywords.keyword
+ keywords.keyword.vocabulary
+ keywords.keyword.vocabularyURL
+ 		 
+ # Subject
+ #
+ # Title of the subject. Can be free text or can belong to a controlled vocabulary. In this case, the 
+ # vocabulary is specified by the attributes subjectScheme and/or schemeURI. The term itself can be 
+ # identified through the attribute valueURI. Language can be specified through the xml:lang-attribute 
+ # according to BCP47 (http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+ subjects.subject
+ subjects.subject.subjectScheme
+ subjects.subject.schemeURI
+ subjects.subject.valueURI
+ subjects.subject.lang
+ 
+ # Date 
+ # 
+ # Different dates relevant to the work. YYYY,YYYY-MM-DD, YYYY-MM-DDThh:mm:ssTZD or any other format or 
+ # level of granularity described in W3CDTF. Use RKMS-ISO8601 standard for depicting date ranges.
+ # Values for dateType: Accepted, Available, Collected, Copyrighted, Created, Issued, Submitted, Updated, Valid
+ dates.date
+ dates.date.dateType
+ 
+ # Version
+ #
+ # Version of the data. Should be specified in the format major.minor, e.g. 1.51
+ version
+ 
+ # Creation Mode 
+ # 
+ # Creation mode of the data. Specific for engineering. Values can be:
+ # Simulation, Experiment, Analysis
+ mode
+ 
+ # Measured Variables
+ #
+ # Measured or simulated variables.
+ measuredVariable.name
+ measuredVariable.symbol
+ measuredVariable.value
+ measuredVariable.encoding
+ measuredVariable.error
+
+ # Controlled Variables
+ # 
+ # Controlled or observed variables
+ controlledVariable.name
+ controlledVariable.symbol
+ controlledVariable.value
+ controlledVariable.encoding
+ controlledVariable.error	 
+ 
+
+
+# Provenance
+#
+# Information about the data provenance for replication: Who did what with which method with the data
+# 
+# ProcessingStep
+# Provenance Information can consist of one or multiple processing steps. 
+# Specification of one processingStep in the data life cycle of the data with 
+# actor (best way pseudonymized), date, used, method, software and hardware, input and output (files).
+
+# Type of step in the research cycle
+# values: generation, postprocessing, analysis, other
+ provenance.processingStep.type  
+
+ # The actor that is responsible for the processing step
+ provenance.processingStep.actor.name
+ provenance.processingStep.actor.givenName
+ provenance.processingStep.actor.familyName
+ provenance.processingStep.actor.address
+ provenance.processingStep.actor.affiliation.name
+ provenance.processingStep.actor.affiliation.givenName
+ provenance.processingStep.actor.affiliation.familyName
+ provenance.processingStep.actor.affiliation.address
+ provenance.processingStep.actor.affiliation.email
+ provenance.processingStep.actor.affiliation.id
+ provenance.processingStep.actor.affiliation.role
+ provenance.processingStep.actor.email
+ provenance.processingStep.actor.id
+ provenance.processingStep.actor.role
+ 
+ # A date associated with the processingStep
+ provenance.processingStep.date
+ 
+ # Definition of used method with name and parameters.Name of the method can be free 
+ # text or can belong to a controlled vocabulary. In this case, the vocabulary is defined 
+ # by methodScheme and methodURI, the term by the termURI. In both cases language can be 
+ # specified through the xml:lang-attribute according to BCP47 
+ # (http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+ provenance.processingStep.method.name.value
+ provenance.processingStep.method.name.methodScheme
+ provenance.processingStep.method.name.schemeURI
+ provenance.processingStep.method.name.valueURI
+ provenance.processingStep.method.description
+ provenance.processingStep.method.parameter.name
+ provenance.processingStep.method.parameter.symbol
+ provenance.processingStep.method.parameter.value
+ provenance.processingStep.method.parameter.encoding 
+ provenance.processingStep.method.parameter.error	
+ 
+ # Error method. Same definition as for the general methods 
+ provenance.processingStep.errormethod.name.value
+ provenance.processingStep.errormethod.name.methodScheme
+ provenance.processingStep.errormethod.name.schemeURI
+ provenance.processingStep.errormethod.name.valueURI
+ provenance.processingStep.errormethod.description
+ provenance.processingStep.errormethod.parameter.name
+ provenance.processingStep.errormethod.parameter.symbol
+ provenance.processingStep.errormethod.parameter.value
+ provenance.processingStep.errormethod.parameter.encoding 
+ provenance.processingStep.errormethod.parameter.error	
+ 
+ 
+ # Input file or stream, specified by (P)ID or link and checksum (optional)
+ provenance.processingStep.input.id
+ provenance.processingStep.input.id.type
+ provenance.processingStep.input.id.scheme
+ provenance.processingStep.input.link
+ provenance.processingStep.input.checksum
+ provenance.processingStep.input.checksum.type
+ 
+ # Software or code, that is used for the simulation. Described according to the
+ # CodeMeta-Schema (https://codemeta.github.io/). The Software must
+ # have a name and can be described further by version
+ # (softwareVersion), programmingLanguage, operatingSystem. An
+ # unbounded number of contributors can be specified. The location of
+ # the software can be specified by an URL, (an URL to the)
+ # SoftwareSourceCode, (an URL to the) SoftwareApplication and/or the
+ # codeRepository. The attribution of the software can be given by
+ # contributor, citation and referencePublication. License specifies
+ # the license under which the software was used.
+ provenance.processingStep.tool.name
+ provenance.processingStep.tool.contributor.name
+ provenance.processingStep.tool.contributor.givenName
+ provenance.processingStep.tool.contributor.familyName
+ provenance.processingStep.tool.contributor.address
+ provenance.processingStep.tool.contributor.affiliation
+ provenance.processingStep.tool.contributor.email
+ provenance.processingStep.tool.contributor.id
+ provenance.processingStep.tool.contributor.role
+ provenance.processingStep.tool.softwareVersion
+ provenance.processingStep.tool.operatingSystem
+ provenance.processingStep.tool.programmingLanguage
+ provenance.processingStep.tool.SoftwareSourceCode.id
+ provenance.processingStep.tool.SoftwareSourceCode.id.type
+ provenance.processingStep.tool.SoftwareSourceCode.id.scheme
+ provenance.processingStep.tool.SoftwareSourceCode.link
+ provenance.processingStep.tool.SoftwareSourceCode.checksum
+ provenance.processingStep.tool.SoftwareSourceCode.checksum.type
+ provenance.processingStep.tool.SoftwareApplication.id
+ provenance.processingStep.tool.SoftwareApplication.id.type
+ provenance.processingStep.tool.SoftwareApplication.id.scheme
+ provenance.processingStep.tool.SoftwareApplication.link
+ provenance.processingStep.tool.SoftwareApplication.checksum
+ provenance.processingStep.tool.SoftwareApplication.checksum.type
+ provenance.processingStep.tool.codeRepository
+ provenance.processingStep.tool.license.note
+ provenance.processingStep.tool.license.terms
+ provenance.processingStep.tool.citation
+ provenance.processingStep.tool.referencedPublication.id
+ provenance.processingStep.tool.referencedPublication.id.scheme
+ provenance.processingStep.tool.referencedPublication.id.type
+ provenance.processingStep.tool.referencedPublication.citation
+ provenance.processingStep.tool.referencedPublication.url
+ 
+ # Exact execution command that was called in this processingStep 
+ provenance.processingStep.executionCommand
+ 
+
+ # Instrument used in this processingStep
+provenance.processingStep.instrument.name 
+provenance.processingStep.instrument.description
+provenance.processingStep.instrument.type
+provenance.processingStep.instrument.partnum.value
+provenance.processingStep.instrument.partnum.vendor
+provenance.processingStep.instrument.serialnum.value
+provenance.processingStep.instrument.serialnum.vendor
+provenance.processingStep.instrument.software
+provenance.processingStep.instrument.software.os
+provenance.processingStep.instrument.date
+
+ # Output file or stream, specified by (P)ID or link and checksum (optional)
+ provenance.processingStep.output.id
+ provenance.processingStep.output.id.type
+ provenance.processingStep.output.id.scheme
+ provenance.processingStep.output.link
+ provenance.processingStep.output.checksum
+ provenance.processingStep.output.checksum.type
+ 
+ 
+ 
+
+ # Computing environment of this processingStep
+ provenance.processingStep.environment.name
+ provenance.processingStep.environment.compiler.name
+ provenance.processingStep.environment.compiler.flags
+ provenance.processingStep.environment.nodes
+ provenance.processingStep.environment.ppn
+ provenance.processingStep.environment.cpu
+ 
+
+ provenance.processingStep.order
+ 
+ # Size
+ #
+ # File size of the data.
+ size
+ 
+ # System 
+ #
+ # Observed System
+ system.phase
+ system.phase.component.name
+ system.phase.component.smilesCode
+ system.phase.component.IUPAC
+ system.phase.component.quantity
+ system.phase.component.unit
+ system.phase.component.forcefield.name
+ system.phase.component.forcefield.parameter.name
+ system.phase.component.forcefield.parameter.symbol
+ system.phase.component.forcefield.parameter.value
+ system.phase.component.forcefield.parameter.encoding
+ system.phase.component.forcefield.parameter.error
+ system.component.name
+ system.component.smilesCode
+ system.component.IUPAC
+ system.component.quantity
+ system.component.unit
+ system.component.forcefield.name
+ system.component.forcefield.parameter.name
+ system.component.forcefield.parameter.symbol
+ system.component.forcefield.parameter.value
+ system.component.forcefield.parameter.encoding
+ system.component.forcefield.parameter.error
+ 
+ 
+ system.grid.file.id
+ system.grid.file.id.type
+ system.grid.file.id.scheme
+ system.grid.file.link
+ system.grid.file.checksum
+ system.grid.file.checksum.type
+ system.grid.countCells
+ system.grid.countBlocks
+ system.grid.targetCores
+ system.grid.countX
+ system.grid.countY
+ system.grid.countZ 
+ system.grid.unit
+ system.grid.distance
+ system.grid.scalingFormula
+ system.grid.point.positionX
+ system.grid.point.positionY
+ system.grid.point.positionZ
+ system.temporalResolution.numberOfTimesteps
+ system.temporalResolution.interval
+ system.temporalResolution.unit
+ system.temporalResolution.timestep
+ system.boundaryCondition.shape
+ system.boundaryCondition.size
+ system.boundaryCondition.position
+
+ system.boundaryCondition.component.name
+ system.boundaryCondition.component.smilesCode
+ system.boundaryCondition.component.IUPAC
+ system.boundaryCondition.component.quantity
+ system.boundaryCondition.component.unit
+ system.boundaryCondition.component.forcefield.name
+ system.boundaryCondition.component.forcefield.parameter.name
+ system.boundaryCondition.component.forcefield.parameter.symbol
+ system.boundaryCondition.component.forcefield.parameter.value
+ system.boundaryCondition.component.forcefield.parameter.encoding
+ system.boundaryCondition.component.forcefield.parameter.error
+ system.boundaryCondition.parameter.name
+ system.boundaryCondition.parameter.symbol
+ system.boundaryCondition.parameter.value
+ system.boundaryCondition.parameter.encoding
+ system.boundaryCondition.parameter.error
+ 
+ # Storage information
+ storage.contentLocation.value
+ storage.contentLocation.link
+ storage.storageMedium
+ storage.storageMedium.URI
+ 
+ # Format information
+ format.formatDesignation.formatName
+ format.formatDesignation.formatVersion
+ format.formatRegistry.name
+ format.formatRegistry.key
+ format.formatRegistry.role
+ 
+ 
+ # The PID of the dataset
+ pid
+ pid.type
+ pid.scheme
+  
+ # Checksum of the dataset
+ checksum 
+ checksum.algorithm
+ 
+ # Rights of the dataset
+ rightsStatement.copyrightInformation.note
+ rightsStatement.copyrightInformation.status
+ rightsStatement.copyrightInformation.countryCode
+ 
+ 
+#Context objects 
+context.referencePublication.id
+context.referencePublication.id.type
+context.referencePublication.id.scheme
+context.referencePublication.citation
+context.referencePublication.url
+context.relatedResource.id
+context.relatedResource.id.type
+context.relatedResource.id.scheme
+context.relatedResource.link
+context.relatedResource.checksum
+context.relatedResource.checksum.scheme
+context.relatedIdentifier
+context.relatedIdentifier.type
+context.relatedIdentifier.scheme
+
+		 
+		 
+		 
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:dtc="http://datacite.org/schema/kernel-4"
+	xmlns:pm="http://www.loc.gov/premis/v3"
+	xmlns:ex="urn:exptml:schema:draft:0.5">
+	<!-- xmlns="http://www.ub.uni-stuttgart.de/dipling" targetNamespace="http://www.ub.uni-stuttgart.de/dipling" -->
+
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+		schemaLocation="http://www.w3.org/2009/01/xml.xsd" />
+	<xs:import namespace="http://datacite.org/schema/kernel-4"
+		schemaLocation="import/datacite-4.0_metadata.xsd" />
+	<xs:import namespace="http://www.loc.gov/premis/v3"
+		schemaLocation="import/premis.xsd" />
+	<xs:import namespace="urn:exptml:schema:draft:0.5"
+		schemaLocation="import/exptml_instrument.xsd" />
+
+
+	<xs:element name="dataset">
+		<xs:complexType>
+			<xs:sequence>
+				<!-- descriptive metadata -->
+				<!-- Contact -->
+				<xs:element name="contact" minOccurs="1"
+					maxOccurs="unbounded" type="personOrOrganization">
+					<xs:annotation>
+						<xs:documentation>Name and contact information of a person or
+							organization that can handle requiries about the data over a long
+							time period.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<!-- eventuell nur ein Feld actor? oder Einschränkung von role auf 'Contact 
+					Person' -->
+				<!-- Author -->
+				<xs:element name="creator" type="personOrOrganization"
+					minOccurs="1" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Name and affiliation of the author(s) of the
+							data. These are the persons who created the data.
+						</xs:documentation>
+					</xs:annotation>
+
+					<!-- ref="dtc:creator" Einschränkung von role auf 'DataCollector' ? -->
+				</xs:element>
+				<xs:element name="contributor"
+					type="personOrOrganization" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Name and affiliation of all persons who
+							contributed to the data.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="project" minOccurs="0"
+					maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Name of the (sub)-project as context of the data
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="level" type="xs:integer"
+									default="0" />
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- Funder of the research data -->
+				<xs:element name="fundingReference" minOccurs="0"
+					maxOccurs="unbounded"> <!-- from datacite fundingReference -->
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="funderName" minOccurs="1"
+								maxOccurs="1">
+								<xs:annotation>
+									<xs:documentation>Name of the funding provider.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string" />
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="funderIdentifier" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Uniquely identifies a funding entity,
+										according to various types.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="funderIdentifierType"
+												type="dtc:funderIdentifierType" use="required" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="awardNumber" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The code assigned by the funder to a
+										sponsored award (grant).</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="awardURI" type="xs:anyURI"
+												use="optional" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="awardTitle" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The human readable title of the award
+										(grant).</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string" />
+								</xs:simpleType>
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+
+				</xs:element>
+
+				<xs:element name="worked" type="xs:boolean" default="1">
+					<xs:annotation>
+						<xs:documentation>Flag, if the data belongs to a successful or
+							unsuccessful research</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="workedNote" type="xs:string"
+					minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Description, why the research was
+							(un-)successful</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+
+
+				<!-- Title of the data -->
+				<xs:element name="title" minOccurs="1"
+					maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>A name or title by which a resource is known.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="titleType" type="dtc:titleType"
+									use="optional" />
+								<xs:attribute ref="xml:lang" />
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="description" minOccurs="0"
+					maxOccurs="unbounded">
+					<!-- dtc:description -->
+					<xs:annotation>
+						<xs:documentation>All additional information that does not fit in
+							any of the other categories. May be used for technical
+							information. It is a best practice to supply a description.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:choice>
+							<xs:element name="br" minOccurs="0"
+								maxOccurs="unbounded">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:length value="0" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:choice>
+						<xs:attribute name="descriptionType"
+							type="dtc:descriptionType" use="required" />
+						<xs:attribute ref="xml:lang" />
+					</xs:complexType>
+
+				</xs:element>
+				<xs:element name="resourceType" minOccurs="0"
+					maxOccurs="1">
+					<!-- dtc:resourceType -->
+					<xs:annotation>
+						<xs:documentation>The type of a resource. You may enter an
+							additional free text description.</xs:documentation>
+						<xs:documentation>The format is open, but the preferred format is
+							a single term of some detail so that a pair can be formed with
+							the sub-property.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="resourceTypeGeneral"
+									type="dtc:resourceType" use="required" />
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<!-- Keywords describing the data -->
+				<xs:element name="keywords" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>List of describing keywords. </xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="keyword" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Each keyword can be free text or can belong
+										to a controlled vocabulary. In this case, the attributes
+										vocabulary and vocabularyURL define this vocabulary.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="vocabulary" type="xs:string"
+												use="optional" />
+											<xs:attribute name="vocabularyURL"
+												type="xs:anyURI" use="optional" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- Research subject area -->
+				<xs:element name="subjects" minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>List of subjects the data belongs to
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType> <!-- dtc:subject -->
+						<xs:sequence>
+							<xs:element name="subject" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Title of the subject. Can be free text or can
+										belong to a controlled vocabulary. In this case, the
+										vocabulary is specified by the attributes subjectScheme and/or
+										schemeURI. The term itself can be identified through the
+										attribute valueURI. Language can be specified through the
+										xml:lang-attribute according to BCP47
+										(http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+									</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="subjectScheme"
+												use="optional" />
+											<xs:attribute name="schemeURI" type="xs:anyURI"
+												use="optional" />
+											<xs:attribute name="valueURI" type="xs:anyURI"
+												use="optional" />
+											<xs:attribute ref="xml:lang" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="dates" minOccurs="0">
+					<!-- dtc:dates -->
+					<xs:annotation>
+						<xs:documentation>Dates according to the data. </xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="date" minOccurs="0"
+								maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Different dates relevant to the work.
+									</xs:documentation>
+									<xs:documentation>YYYY,YYYY-MM-DD, YYYY-MM-DDThh:mm:ssTZD or
+										any other format or level of granularity described in W3CDTF.
+										Use RKMS-ISO8601 standard for depicting date ranges.
+									</xs:documentation>
+									<xs:documentation>Values for dateType: Accepted, Available,
+										Collected, Copyrighted, Created, Issued, Submitted, Updated,
+										Valid </xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="dateType"
+												type="dtc:dateType" use="required" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- Version -->
+				<xs:element name="version" type="xs:string" minOccurs="1"
+					maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Version of the data. Should be specified in the
+							format major.minor, e.g. 1.51</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+
+				<!-- Datenerzeugungsmethode -->
+				<xs:element name="mode" minOccurs="0" maxOccurs="3">
+					<xs:annotation>
+						<xs:documentation>Creation mode of the data. Specific for
+							engineering.</xs:documentation>
+					</xs:annotation>
+
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Simulation" />
+							<xs:enumeration value="Experiment" />
+							<xs:enumeration value="Analysis" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<!-- Simulation, Experiment, Analyse -->
+
+
+				<!-- Measured variables -->
+				<xs:element name="measuredVariable" type="variable"
+					minOccurs="0" maxOccurs="unbounded">
+					<!-- hier oder im system -->
+					<xs:annotation>
+						<xs:documentation>measured or simulated variables.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<!-- Controlled variables -->
+				<xs:element name="controlledVariable" type="variable"
+					minOccurs="0" maxOccurs="unbounded">
+					<!-- hier oder im system -->
+					<xs:annotation>
+						<xs:documentation>Controlled or observed variables
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+
+				<xs:element name="system" minOccurs="0"
+					maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Observed System</xs:documentation>
+					</xs:annotation>
+
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="phase" minOccurs="0"
+								maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Phases of the observed system. Specific for
+										thermodynamics or environmental sciences</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="component" type="component"
+											minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Components of the phase</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" type="xs:string"
+										use="required" />
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="component" type="component"
+								minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Components of the observed system
+									</xs:documentation>
+								</xs:annotation>
+
+							</xs:element>
+							<xs:element name="parameter" type="variable"
+								minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Parameters of the observed system
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="grid" type="spacialResolution"
+								minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Spacial resolution of the observation.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<!-- noch ausformulieren, zu system, processingStep? oder extra? -->
+							<xs:element name="temporalResolution"
+								type="temporalResolution" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Temporal resolution of the observation.
+									</xs:documentation>
+								</xs:annotation>
+
+							</xs:element>
+							<!-- noch ausformulieren optional -->
+							<xs:element name="boundaryCondition"
+								type="boundaryCondition" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Conditions of the boundaries of the observed
+										system.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<!-- noch ausformulieren optional -->
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:ID" use="optional" />
+					</xs:complexType>
+				</xs:element>
+
+
+
+				<!-- provenance / changeLog -->
+				<xs:element name="provenance" minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Information about the data provenance for
+							replication: Who did what with which method with the data
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="step" type="processingStep"
+								minOccurs="1" maxOccurs="unbounded" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+
+
+				<!-- administrative/preservation/technical metadata -->
+				<!-- file size in bytes -->
+				<xs:element name="size" type="xs:long" minOccurs="1"
+					maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>File size of the data.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+
+				<!-- file name -->
+				<xs:element name="storage" type="pm:storageComplexType"
+					minOccurs="1" maxOccurs="1" />
+				<!-- file type /-format -->
+				<xs:element name="format" type="pm:formatComplexType"
+					minOccurs="1" maxOccurs="1" />
+				<!-- persistent identifier / PID -->
+				<xs:element name="identifier" type="pid" minOccurs="0"
+					maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>PIDs of the data, e.g. DOI, ArXiV-ID, EPIC-PID,
+							etc.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<!-- checksum / hash -->
+				<xs:element name="checksum" type="checksumType"
+					minOccurs="0" maxOccurs="1">
+					<!-- METS:checksumtype -->
+					<xs:annotation>
+						<xs:documentation>checksum of the data</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<!-- access rights -->
+				<xs:element name="rightsStatement"
+					type="pm:rightsStatementComplexType" minOccurs="0"
+					maxOccurs="unbounded">
+					<!-- alternativ ra:rights (controlledRights, additionalRights) -->
+					<!-- license in rightsStatement enthalten -->
+					<xs:annotation>
+						<xs:documentation>rights information about the data, e.g. license,
+							copyright, ...</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<!-- context / link to other data objects -->
+				<xs:element name="context" minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Context of the data, references to publications,
+							resources or other identifiers.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="referencePublication"
+								type="publication" />
+							<xs:element name="relatedResource"
+								type="fileOrResource" />
+							<xs:element name="relatedIdentifier">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="relatedIdentifierType"
+												type="dtc:relatedIdentifierType" use="required" />
+											<xs:attribute name="relationType"
+												type="dtc:relationType" use="required" />
+											<xs:attribute name="relatedMetadataScheme"
+												use="optional" />
+											<xs:attribute name="schemeURI" type="xs:anyURI"
+												use="optional" />
+											<xs:attribute name="schemeType" use="optional" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<!-- Definierte Typen -->
+	<xs:complexType name="personOrOrganization">
+		<xs:annotation>
+			<xs:documentation>Specifies a person or organization involved in the
+				data creation process. Name of a person shall be written as
+				"familiyName, givenName", ID can be an ORCID. Contact information
+				(important for the contact person/organization of the data) can be
+				given by email and address. Role is one of the list of the
+				contributorType from DataCite
+				(view-source:https://schema.datacite.org/meta/kernel-4.1/include/datacite-contributorType-v4.xsd).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1" /> <!-- creatorName bei Datacite -->
+			<xs:element name="givenName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="familyName" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="address" type="xs:string" minOccurs="0" />
+			<xs:element name="affiliation" type="personOrOrganization"
+				minOccurs="0" />
+			<xs:element name="email" type="xs:string" minOccurs="0" />
+			<xs:element name="id" type="pid" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="role" type="dtc:contributorType"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<!-- hardware entfernt -> instrument -->
+
+	<xs:complexType name="software">
+		<xs:annotation>
+			<xs:documentation>Software or code, described according to the
+				CodeMeta-Schema (https://codemeta.github.io/). The Software must
+				have a name and can be described further by version
+				(softwareVersion), programmingLanguage, operatingSystem. An
+				unbounded number of contributors can be specified. The location of
+				the software can be specified by an URL, (an URL to the)
+				SoftwareSourceCode, (an URL to the) SoftwareApplication and/or the
+				codeRepository. The attribution of the software can be given by
+				contributor, citation and referencePublication. License specifies
+				the license under which the software was used.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1" />
+			<xs:element name="contributor" type="personOrOrganization"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="softwareVersion" type="xs:string"
+				minOccurs="1" />
+			<!-- aus codemeta -->
+			<xs:element name="programmingLanguage" type="xs:string"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="operatingSystem" type="xs:string"
+				minOccurs="0" maxOccurs="unbounded" /> <!-- aus CodeMeta -->
+			<xs:element name="URL" type="xs:anyURI" minOccurs="0" /> <!-- kann auch Link zu Software-Datenpaket sein -->
+			<xs:element name="SoftwareSourceCode"
+				type="fileOrResource" minOccurs="0" /> <!-- aus CodeMeta -->
+			<xs:element name="SoftwareApplication"
+				type="fileOrResource" minOccurs="0" /> <!-- aus CodeMeta -->
+			<xs:element name="codeRepository" type="xs:anyURI"
+				minOccurs="0" /> <!-- aus CodeMeta -->
+			<xs:element name="licence"
+				type="pm:licenseInformationComplexType" minOccurs="0"
+				maxOccurs="unbounded" /> <!-- aus CodeMeta -->
+			<xs:element name="citation" type="xs:string" minOccurs="0" />
+			<xs:element name="referencePublication" type="publication"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="environment">
+		<xs:annotation>
+			<xs:documentation>Computation environment of the data. Important for
+				numerical simulations or other software code. Is specified by a
+				name, the number of nodes and the number of processors per node
+				(ppn). An unbounded number of compilers can be specified by name and
+				flags</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="compiler" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:all>
+						<xs:element name="name" type="xs:string" minOccurs="1" />
+						<xs:element name="flags" type="xs:string" minOccurs="1" />
+					</xs:all>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="nodes" type="xs:string" minOccurs="0" />
+			<xs:element name="ppn" type="xs:string" minOccurs="0" />
+			<xs:element name="cpu" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded" /><!-- new in version 1.1 -->
+		</xs:sequence>
+
+	</xs:complexType>
+
+
+	<xs:complexType name="component">
+		<xs:annotation>
+			<xs:documentation>Component of the observed system. Must have a name.
+				Quantity and unit of the component in the observed system can be
+				specified. In case of a thermodynamical component, the molecule can
+				be specified by smilesCode and/or IUPAC-Code and can have a defined
+				forcefield. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="smilesCode" type="xs:string"
+				minOccurs="0" /><!-- vielleicht als Attribut -->
+			<xs:element name="IUPAC" type="xs:string" minOccurs="0" /><!-- 
+				vielleicht als Attribut -->
+			<xs:element name="quantity" type="xs:integer"
+				minOccurs="0" />
+			<xs:element name="unit" type="xs:string" minOccurs="0" />
+			<xs:element name="forcefield" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Forcefield of a component. Must have a name and
+						can have parameters. Specific for thermodynamics.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="xs:string" minOccurs="1" />
+						<xs:element name="parameter" type="variable"
+							minOccurs="0" maxOccurs="unbounded">
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="optional" />
+	</xs:complexType>
+	<xs:complexType name="variable">
+		<xs:annotation>
+			<xs:documentation>Variable, used as parameter, observed variable or
+				controlled variable. Must have a name and can have a value with
+				encoding. Can be represented by a 
+
+
+
+
+
+
+
+
+</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1"
+				maxOccurs="1" />
+			<xs:element name="symbol" type="xs:string" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="value" type="xs:string" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="encoding" type="xs:string" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="error" type="xs:decimal" minOccurs="0"
+				maxOccurs="1" /> <!-- unklar -->
+
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="pid"> <!-- Was ist mit FunderRef IDs (siehe fundingInformation) -->
+		<xs:annotation>
+			<xs:documentation>Persistent identifier as URI, can ge further
+				specified through a type and a scheme. </xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="type">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="doi" />
+							<xs:enumeration value="urn" />
+							<xs:enumeration value="epic" />
+							<xs:enumeration value="handle" />
+							<xs:enumeration value="orcid" />
+							<xs:enumeration value="gnd" />
+							<xs:enumeration value="other" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute type="xs:string" name="scheme"
+					use="optional" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="fileOrResource">
+		<xs:annotation>
+			<xs:documentation>Specification of a file or a resource.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="pid" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="link" type="xs:anyURI" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="checksum" type="checksumType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<!-- Publications related to/based on the research data, oder entfernen 
+		und nur unter Kontext? -->
+
+
+
+	<xs:complexType name="processingStep">
+		<xs:annotation>
+			<xs:documentation>Specification of one processingStep in the data
+				life cycle of the data with actor (pseudonymized), date, used
+				method, software and hardware, input and output (files).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type">
+				<xs:annotation>
+					<xs:documentation>Specifies the position in the data life cycle.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="generation" />
+						<xs:enumeration value="postprocessing" />
+						<xs:enumeration value="analysis" />
+						<xs:enumeration value="other" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="actor" type="personOrOrganization"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="date" type="xs:dateTime" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="method" type="method" minOccurs="0"
+				maxOccurs="unbounded" /> <!-- Beschreibung, Parameter der Methode fehlen -->
+			<xs:element name="errorMethod" type="method" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="input" type="fileOrResource"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="tool" type="software" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xs:element name="executionCommand" type="xs:string"
+				minOccurs="0" maxOccurs="unbounded" /> <!-- new in version 1.1 -->
+			<xs:element name="instrument" type="ex:instrumentType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="environment" type="environment"
+				minOccurs="0" maxOccurs="1" />
+			<xs:element name="system" type="xs:IDREF" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="output" type="fileOrResource"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="order" type="xs:integer"
+			use="optional" />
+		<!-- hier die verschiedenen Creation oder Verarbeitungsschritte Methode, 
+			Variablen, Software, Hardware, System, etc. einbauen -->
+	</xs:complexType>
+
+	<xs:complexType name="method">
+		<xs:annotation>
+			<xs:documentation>Definition of used method with name and parameters.
+				Name of the method can be free text or can belong to a controlled
+				vocabulary. In this case, the vocabulary is defined by methodScheme
+				and methodURI, the term by the termURI.
+				In both cases language can be specified through the xml:lang-attribute
+				according to BCP47 (http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="methodScheme" use="optional" />
+							<xs:attribute name="schemeURI" type="xs:anyURI"
+								use="optional" />
+							<xs:attribute name="valueURI" type="xs:anyURI"
+								use="optional" />
+							<xs:attribute ref="xml:lang" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="description" type="xs:string"
+				minOccurs="0" maxOccurs="1" /> <!-- new in version 1.1 -->
+			<xs:element name="parameter" type="variable" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="spacialResolution">
+		<xs:annotation>
+			<xs:documentation>Spacial resolution of the observation. Can be
+				defined:
+				- either by a reference to a file with the definition of the grid
+				- a specification by the number of Cells and/or Blocks (countCells,
+				countBlocks)
+				- the number of grid-points in x,y and z dimension (countX, countY,
+				countZ) together with distance between theses points and unit
+				(equidistant grid)
+				- a scaling formula
+				- a set of points, defined by x-coordinate, y-coordinate (and
+				z-coordinate) together with the unit
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="file" type="fileOrResource"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="countCells" type="xs:integer"
+				minOccurs="0" />
+			<xs:element name="countBlocks" type="xs:integer"
+				minOccurs="0" />
+			<xs:element name="targetCores" type="xs:integer"
+				minOccurs="0" />
+			<xs:element name="countX" type="xs:integer" />
+			<xs:element name="countY" type="xs:integer" />
+			<xs:element name="countZ" type="xs:integer" />
+			<xs:element name="unit" type="xs:string" minOccurs="0" />
+			<xs:element name="distance" type="xs:decimal"
+				minOccurs="0" />
+			<xs:element name="scalingFormula" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="point" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="positionX" type="xs:decimal" />
+						<xs:element name="positionY" type="xs:decimal" />
+						<xs:element name="positionZ" type="xs:decimal" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="temporalResolution">
+		<xs:annotation>
+			<xs:documentation>Temporal resolution of the observation. Can be
+				defined either through
+				- a number of timesteps with a definition of the intervals (with
+				unit) between the timesteps (equidistant time steps)
+				- a series of timesteps together with the unit.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="numberOfTimesteps" type="xs:integer" />
+			<xs:element name="interval" type="xs:decimal"
+				minOccurs="0" /> <!-- als xs:choice? -->
+			<xs:element name="unit" type="xs:string" minOccurs="0" />
+			<xs:element name="timeStep" type="xs:decimal"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="boundaryCondition">
+		<xs:annotation>
+			<xs:documentation>Definition of boundaries of the observed system
+				with inflows and outflows (defined with shape, position and size)
+				and components of these flows. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="flow" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="shape" type="xs:string" minOccurs="0" />
+						<xs:element name="size" type="xs:float" minOccurs="0" />  <!-- zu klären -->
+						<xs:element name="position" type="xs:string"
+							minOccurs="0" /> <!-- zu klären, xyz? -->
+						<xs:element name="component" type="xs:IDREF"
+							minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parameter" type="variable" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="checksumType">
+		<xs:annotation>
+			<xs:documentation>Checksum of a file with optional definition of the
+				checksum algorithm</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="algorithm" type="xs:string"
+					use="optional" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
