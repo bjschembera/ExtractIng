@@ -92,9 +92,12 @@ public class SparkExtractIng extends ExtractIng implements java.io.Serializable 
 		File userdir = new File(inputDir);
 
 		String dataSuffix = "foo";
+		
+		// Leading and Trailing Characters that should be cutted
+		String[] extraChar = {};
 
 		// Begin Spark Stuff: Set the application name and start Spark context
-		SparkConf conf = new SparkConf().setAppName("Harvester");
+		SparkConf conf = new SparkConf().setAppName("ExtractIng");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
 		// This data structure holds the metadata file suffixes and the RDD data
@@ -143,6 +146,17 @@ public class SparkExtractIng extends ExtractIng implements java.io.Serializable 
 						dataSuffix = segs[1];
 
 					}
+					
+					// If there are leading and trailing characters defined in the config file
+					if (segs[0].equals("char_to_cut")) {
+						
+						extraChar = segs[1].split(Pattern.quote(","));
+						
+						//If comma itself should be omitted, too, uncomment these lines:
+						extraChar = Arrays.copyOf(extraChar, extraChar.length + 1);
+						extraChar[extraChar.length - 1] = ",";
+						
+					}
 
 					// Only if checksumming is enabled in the config file, do it.
 					if (segs[0].equals("checksum")) {
@@ -183,6 +197,7 @@ public class SparkExtractIng extends ExtractIng implements java.io.Serializable 
 		}
 
 		final String finalDataSuffix = dataSuffix;
+		final String [] finalExtraChar = extraChar;
 
 		// List of all data Files/non-MD files
 		File[] dataFiles = userdir.listFiles(new FilenameFilter() {
@@ -482,8 +497,10 @@ public class SparkExtractIng extends ExtractIng implements java.io.Serializable 
 										if (x.split(delim).length > 1) {
 
 											// if a fixed Metadata/EngMeta key should be harvested
-											return new Tuple2<String, String>(MDKey, x.split(delim)[1]);
-
+											//return new Tuple2<String, String>(MDKey, x.split(delim)[1]);
+											x = ExtractIng.cutExtraChar(x, delim, finalExtraChar);
+											return new Tuple2<String, String>(MDKey, x);
+											
 										} else {
 
 											// if a fixed Metadata/EngMeta key should be harvested
@@ -541,75 +558,74 @@ public class SparkExtractIng extends ExtractIng implements java.io.Serializable 
 		 * creating an array, then transforming this array to an RDD.
 		 */
 
-		// Assemble the filename
-		// System.out.println(inputDir);
-		// System.out.println(dataFiles[0]);
+		for (int i = 0; i < dataFiles.length; i++) {
 
-		String fileName = inputDir + dataFiles[0];
-
-		// Create a List with one entry as the starting point
-		// from the array, create a one-dimensional RDD (all done in one expression so
-		// no extra variable is needed
-		JavaRDD<String> fileNameRDD = sc.parallelize(Arrays.asList("storage"));
-
-		// map the one dimensional RDD to a two-dimensional RDD to comply with the
-		// key,value representation we need
-		JavaPairRDD<String, String> fileNameKV = fileNameRDD.mapToPair(s -> new Tuple2<>(s, fileName));
-
-		// MDKV = MDKV.union(fileNameKV);
-
-		/*
-		 * 
-		 * Check the file size
-		 * 
-		 */
-
-		long size = dataFiles[0].length();
-
-		// Create a List with one entry as the starting point
-		// TODO: maybe implement is an array with multiple entries since there might be
-		// more than one data file
-		// from the array, create a one-dimensional RDD (all done in one expression so
-		// no extra variable is needed
-		JavaRDD<String> sizeRDD = sc.parallelize(Arrays.asList("size"));
-
-		// map the one dimensional RDD to a two-dimensional RDD to comply with the
-		// key,value representation we need
-		JavaPairRDD<String, String> sizeKV = sizeRDD.mapToPair(s -> new Tuple2<>(s, Long.toString(size)));
-
-		// MDKV = MDKV.union(sizeKV);
-
-		// Do checksumming only if it is enabled in the config file
-		if (checksum) {
-			/*
-			 * 
-			 * Calculate the checksum
-			 * 
-			 */
-
-			// Use MD5 algorithm
-			MessageDigest md5Digest = MessageDigest.getInstance("MD5");
-
-			// Get the checksum
-			String checksum = fileChecksum(md5Digest, dataFiles[0]);
-
-			// see checksum
-			if (DEBUG)
-				System.out.println(checksum);
-
+			String fileName = inputDir + dataFiles[i];
+	
 			// Create a List with one entry as the starting point
 			// from the array, create a one-dimensional RDD (all done in one expression so
 			// no extra variable is needed
-			JavaRDD<String> checksumRDD = sc.parallelize(Arrays.asList("checksum"));
-
+			JavaRDD<String> fileNameRDD = sc.parallelize(Arrays.asList("storage"));
+	
 			// map the one dimensional RDD to a two-dimensional RDD to comply with the
 			// key,value representation we need
-			JavaPairRDD<String, String> checksumKV = checksumRDD.mapToPair(s -> new Tuple2<>(s, checksum));
-
-			// MDKV = MDKV.union(checksumKV);
-
+			JavaPairRDD<String, String> fileNameKV = fileNameRDD.mapToPair(s -> new Tuple2<>(s, fileName));
+	
+			//MDKV = MDKV.union(fileNameKV);
+	
+			/*
+			 * 
+			 * Check the file size
+			 * 
+			 */
+	
+			long size = dataFiles[i].length();
+	
+			// Create a List with one entry as the starting point
+			// TODO: maybe implement is an array with multiple entries since there might be
+			// more than one data file
+			// from the array, create a one-dimensional RDD (all done in one expression so
+			// no extra variable is needed
+			JavaRDD<String> sizeRDD = sc.parallelize(Arrays.asList("size"));
+	
+			// map the one dimensional RDD to a two-dimensional RDD to comply with the
+			// key,value representation we need
+			JavaPairRDD<String, String> sizeKV = sizeRDD.mapToPair(s -> new Tuple2<>(s, Long.toString(size)));
+	
+			//MDKV = MDKV.union(sizeKV);
+	
+			// Do checksumming only if it is enabled in the config file
+			if (checksum) {
+				/*
+				 * 
+				 * Calculate the checksum
+				 * 
+				 */
+	
+				// Use MD5 algorithm
+				MessageDigest md5Digest = MessageDigest.getInstance("MD5");
+	
+				// Get the checksum
+				String checksum = fileChecksum(md5Digest, dataFiles[i]);
+	
+				// see checksum
+				if (DEBUG)
+					System.out.println(checksum);
+	
+				// Create a List with one entry as the starting point
+				// from the array, create a one-dimensional RDD (all done in one expression so
+				// no extra variable is needed
+				JavaRDD<String> checksumRDD = sc.parallelize(Arrays.asList("checksum"));
+	
+				// map the one dimensional RDD to a two-dimensional RDD to comply with the
+				// key,value representation we need
+				JavaPairRDD<String, String> checksumKV = checksumRDD.mapToPair(s -> new Tuple2<>(s, checksum));
+	
+				//MDKV = MDKV.union(checksumKV);
+	
+			}
 		}
-
+		
 		// Stop the Spark context
 		// (Otherwise resrouces would leak)
 		sc.stop();

@@ -15,6 +15,12 @@ For running:
 * Bash
 * Spark, if the parallel version should be used
 
+If there are problems with a newer version of Java, you can use the following procedure (for example with Ubuntu):
+
+*     sudo apt-get install openjdk-8-jre
+*     sudo update-alternatives --config java
+
+
 
 
 
@@ -74,24 +80,36 @@ Usage
 
 ExtractIng is wrapped in script, which performs some preparatory tasks before runnig the extraction. The syntax of the script is as follows:
 
-    ./fdm.sh <configFile> <directoryToParse> [scanner|spark]
+    ./fdm.sh -c <configFile> -p <directoryToParse>|"<dir1> <dir2> ..." -m [scanner|spark] [-e <executorCores> 
 
 `<configFile>` should hold the location of the configuration file
 
-`<directoryToParse>` specifies the directory of the simulation code outputs, where the information should be extracted from
+`<directoryToParse>` specifies the directory of the simulation code outputs, where the information should be extracted from. When multiple directories should be parsed, they have to be put in brackets.
 
-`[scanner|spark]` specifies the mode: scanner mode is the native, parallel mode, whereas spark is the parallel execution mode that needs the Spark Data Analytics Framework
+`[scanner|spark]` specifies the mode: scanner mode is the native, parallel mode, whereas spark is the parallel execution mode that needs the Spark Data Analytics Frameworki
+
+`<executorCore>` specifies the number of cores that should be used for processing, if parallel/Spark version is used
+
+Version History / Change Log
+-----
+
+March 20th 2020, v0.8 
+Initial relase of ExtractIng
+ 
+September 2nd 2020, v0.82
+* Multiple data files can reside in the directory to parse
+* Syntax changes in the wrapper script
+* Multiple directories can now be parsed in one program clal
+
+
 
 Development Roadmap
 -----
 
 Since this is a prototypical implementation, we try to continiously improve the code and add feature.
 
-Planned for 2Q2020:
-* Syntax improvements for the wrapper script.
-* Multiple directories can be passed in the parameters for the directory.
+Planned for 4Q2020:
 * Improved cutting function to capture values that are marshalled with leading and trailing characters, such as `key="value"`.
-* Multiple data files in one directory should be handled.
 
 
 

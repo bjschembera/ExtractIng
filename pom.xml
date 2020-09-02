@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <name>ExtractIng</name>
   <packaging>jar</packaging>
-  <version>0.8</version>
+  <version>0.82</version>
   <dependencies>
     <dependency> <!-- Spark dependency -->
       <groupId>org.apache.spark</groupId>

@@ -21,6 +21,15 @@
  *
  */
 
+
+/*
+ * ExtractIng is a tool for the automated metadata extraction. It was 
+ * developed for the extraction of simulation code outputs in high performance
+ * computing environments.
+ * For further information please refer to 
+ * https://github.com/bjschembera/ExtractIng
+ */
+
 package ExtractIng;
 
 import java.lang.String;
@@ -31,7 +40,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -292,6 +303,67 @@ public class ExtractIng {
 		}
 
 	}
+	
+	/**
+	 * Leading and Trailing Character cutting function
+	 * It would be called in the regular key/value parsing here (the usual case)
+	 * 
+	 * TODO: This function does not work yet.
+	 * 
+	 * 
+	 * @param input
+	 * 		The file handle for the file to check.
+	 * @param delimiter
+	 * 		The file handle for the file to check.
+	 * @param charToCut
+	 * 		The file handle for the file to check.
+	 * @return 
+	 * 		The value of the key
+	 */
+	
+	public static String cutExtraChar(String input, String delimiter, String[] charToCut) {
+		
+		// First, cut by the delimiter, so array looks like [creator.name,"Hamzeh Kraus"]
+		String[] foo = input.split(delimiter);
+		String value = foo[1];
+		
+		// Converting String array to List
+		List list = Arrays.asList(charToCut);
+		
+		String fc = "";
+		String lc = "";
+		
+		//Striping spaces around the value, but not in between
+		value = value.trim();
+		
+		do {
+			//Defining first and last char in variables and then convert them to String 
+			char firstchar = value.charAt(0);
+			fc = Character.toString(firstchar); 
+			
+			char lastchar = value.charAt(value.length() - 1);
+			lc = Character.toString(lastchar);
+			
+			//checks if at the beginning is there a leading char
+			  if (list.contains(fc)) {
+				  value = value.substring(1);
+			  }
+	
+			//checks if at the end is there a trailing char
+			  if (list.contains(lc)) {
+				  value = value.substring(0, value.length() - 1);
+			  }
+			  
+			  char newfirstchar = value.charAt(0);
+			  fc = Character.toString(newfirstchar);
+			  
+			  char newlastchar = value.charAt(value.length() - 1);
+			  lc = Character.toString(newlastchar);
+
+		}while (list.contains(fc) | list.contains(lc));
+		return value;
+		
+	}
 
 	/**
 	 * The main method for the extractor. Checks the correctness of the arguments
@@ -303,59 +375,72 @@ public class ExtractIng {
 	 */
 
 	public static void main(String args[]) throws Exception {
-
-		if (args.length != 3) {
-			System.err.println("Wrong number of parameters... Exiting.");
-			System.err.println("Correct Syntax: ./fdm.sh <ConfigFile> <DirectoryToParse> <Mode>");
+		
+		if (args.length == 0) {
+			System.err.println("Please specify the parameters as explained above.");
 			System.exit(1);
 		}
+	    
 
 		File configFile = new File(args[0]).getAbsoluteFile();
 		if (!configFile.exists() || configFile.isDirectory()) {
 			System.err.println("Config File does not exist... Exiting.");
-			System.err.println("Correct Syntax: ./fdm.sh <ConfigFile> <DirectoryToParse> <Mode>");
+			System.err.println("Correct Syntax: ./fdm.sh -c \"<configFile>\" -p \"<path1> <path2> ...\" -m \"<scanner|spark>\"");
 			System.exit(1);
 		}
+		
+		for (int i = 1; i < args.length-1; i++) { 
+			
+			//these print lines are just for testing!
+			System.out.println("###########################################################");
+			System.out.println("Config file : "+ args[0]);
+			System.out.println("Path is : "+ args[i]);
+			System.out.println("Execution mode is : "+ args[args.length-1]);
+			System.out.println("###########################################################");
+			
+			
+	        
+	        
+	        
+			File parseDir = new File(args[i]).getAbsoluteFile();
+			if (!parseDir.isDirectory()) {
+				System.err.println("No Directory to parse specified... Exiting.");
+				System.err.println("Correct Syntax: ./fdm.sh -c \"<configFile>\" -p \"<path1> <path2> ...\" -m \"<scanner|spark>\"");
+				System.exit(1);
+			}
 
-		File parseDir = new File(args[1]).getAbsoluteFile();
-		if (!parseDir.isDirectory()) {
-			System.err.println("No Directory to parse specified... Exiting.");
-			System.err.println("Correct Syntax: ./fdm.sh <ConfigFile> <DirectoryToParse> <Mode>");
-			System.exit(1);
+			if (args[args.length-1].equals("spark")) {
+				SparkExtractIng ExtractIng = new SparkExtractIng();
+	
+				Map<String, HashMap<Integer, String>> MD2 = new HashMap<String, HashMap<Integer, String>>();
+	
+				OutputMD outputClass = new OutputMD();
+	
+				MD2 = ExtractIng.parse(args[0], args[i]);
+				outputClass.EngMetaXML(MD2, args[i]);
+				outputClass.DCTermsXML(MD2, args[i]);
+				outputClass.FlatTxt(MD2, args[i]);
+	
+			} else if (args[args.length-1].equals("scanner")) {
+				ScannerExtractIng ExtractIng = new ScannerExtractIng();
+	
+				Map<String, HashMap<Integer, String>> parseMD = new HashMap<String, HashMap<Integer, String>>();
+	
+				OutputMD outputClass = new OutputMD();
+	
+				parseMD = ExtractIng.parse(args[0], args[i]);
+				outputClass.EngMetaXML(parseMD, args[i]);
+				outputClass.DCTermsXML(parseMD, args[i]);
+				outputClass.FlatTxt(parseMD, args[i]);
+				// System.out.println("done");
+			} else {
+	
+				System.err.println("Parsing method not known... Exiting.");
+				System.err.println("Correct Syntax: ./fdm.sh -c \"<configFile>\" -p \"<path1> <path2> ...\" -m \"<scanner|spark>\"");
+				System.exit(1);
+			} 
 		}
-
-		if (args[2].equals("spark")) {
-			SparkExtractIng harvester = new SparkExtractIng();
-
-			Map<String, HashMap<Integer, String>> MD2 = new HashMap<String, HashMap<Integer, String>>();
-
-			OutputMD outputClass = new OutputMD();
-
-			MD2 = harvester.parse(args[0], args[1]);
-			outputClass.EngMetaXML(MD2, args[1]);
-			outputClass.DCTermsXML(MD2, args[1]);
-			outputClass.FlatTxt(MD2, args[1]);
-
-		} else if (args[2].equals("scanner")) {
-			ScannerExtractIng harvester = new ScannerExtractIng();
-
-			Map<String, HashMap<Integer, String>> parseMD = new HashMap<String, HashMap<Integer, String>>();
-
-			OutputMD outputClass = new OutputMD();
-
-			parseMD = harvester.parse(args[0], args[1]);
-			outputClass.EngMetaXML(parseMD, args[1]);
-			outputClass.DCTermsXML(parseMD, args[1]);
-			outputClass.FlatTxt(parseMD, args[1]);
-			// System.out.println("done");
-		} else {
-
-			System.err.println("Parsing method not known... Exiting.");
-			System.err.println("Correct Syntax: ./fdm.sh <ConfigFile> <DirectoryToParse> <Mode>");
-			System.err.println("<Mode> must either be 'scanner' or 'spark'");
-			System.exit(1);
-		}
-
 	}
+
 
 }

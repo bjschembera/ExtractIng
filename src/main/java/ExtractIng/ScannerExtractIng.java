@@ -29,6 +29,7 @@ import java.io.FilenameFilter;
 
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import java.util.Map;
@@ -41,9 +42,7 @@ import java.util.regex.Pattern;
  * This class implements parsing of metadata in a native approach using the Java
  * Scanner API. Scanner is quite comfortable however a little slower than
  * BufferedReaders.
- * 
- * 
- * 
+ *  
  * @author Bjoern Schembera
  *
  */
@@ -82,6 +81,9 @@ public class ScannerExtractIng extends ExtractIng {
 
 		// Description of the data files
 		String dataSuffix = "foo";
+		
+		// Leading and Trailing Characters that should be cut
+		String[] extraChar = {};
 
 		/*
 		 * 
@@ -125,6 +127,17 @@ public class ScannerExtractIng extends ExtractIng {
 							checksum = false;
 						}
 
+					}
+					
+					// If there are leading and trailing characters defined in the config file
+					if (segs[0].equals("char_to_cut")) {
+						
+						extraChar = segs[1].split(Pattern.quote(","));
+						
+						//If comma itself should be omitted, too, uncomment these lines:
+						extraChar = Arrays.copyOf(extraChar, extraChar.length + 1);
+						extraChar[extraChar.length - 1] = ",";
+						
 					}
 
 					// In case of multiple search results, decide which one to take
@@ -191,6 +204,9 @@ public class ScannerExtractIng extends ExtractIng {
 			outerloop: while (sca.hasNextLine()) {
 				// Scan the config file line for line
 				String i = sca.nextLine();
+				
+				// split the line by = to get the file, code and additional information
+				String[] segs = i.split(Pattern.quote("="));
 
 				if (!i.startsWith("#")) {
 
@@ -271,7 +287,7 @@ public class ScannerExtractIng extends ExtractIng {
 
 							continue outerloop;
 						}
-
+						
 						// For development purposes: only take the first file of this type
 						// TODO: implement it for more files. Has to be done in a loop
 
@@ -352,8 +368,8 @@ public class ScannerExtractIng extends ExtractIng {
 											// TODO: think if it is useful to make search results unique??
 											MD.putIfAbsent(MDKey, new HashMap<Integer, String>());
 
-											MD.get(MDKey).put(index, line.split(delim)[1].trim());
-
+											//MD.get(MDKey).put(index, line.split(delim)[1].trim());
+											MD.get(MDKey).put(index, ExtractIng.cutExtraChar(line, delim, extraChar));
 											// }
 										}
 
@@ -402,7 +418,7 @@ public class ScannerExtractIng extends ExtractIng {
 
 		//////////////////////////////////////////////////////////////////////////////
 		//
-		// Parsing of the explicit and implicit File Metadta in expFileMD
+		// Parsing of the explicit and implicit File Metadata in expFileMD
 		//
 		///////////////////////////////////////////////////////////////////////////////
 
@@ -412,47 +428,45 @@ public class ScannerExtractIng extends ExtractIng {
 		 * here: Possible reason: based on an empty RDD This was solved by first
 		 * creating an array, then transforming this array to an RDD.
 		 */
-
-		// Assemble the filename
-		String fileName = inputDir + dataFiles[0];
-		MD.putIfAbsent("storage", new HashMap<Integer, String>());
-		MD.get("storage").put(0, fileName);
-		// MD.put("storage", fileName);
-		/*
-		 * 
-		 * Check the file size
-		 * 
-		 */
-
-		long size = dataFiles[0].length();
-
-		// if (DEBUG) {
-		//
-		// for (int i = 0; i < dataFiles.length; i++) {
-		// System.out.println("Filesize is:" + dataFiles[i].length());
-		// }
-		// }
-		MD.putIfAbsent("size", new HashMap<Integer, String>());
-		MD.get("size").put(0, Long.toString(size));
-		// MD.put("size", Long.toString(size));
-
-		// Do checksumming only if it is enabled in the config file
-		if (checksum) {
+		
+		for (int i = 0; i < dataFiles.length; i++) { 
+			// Assemble the filename
+			String fileName = inputDir + dataFiles[i];
+			MD.putIfAbsent("storage", new HashMap<Integer,String>());
+			MD.get("storage").put(i, fileName);
+		
 			/*
 			 * 
-			 * Calculate the checksum
+			 * Check the file size
 			 * 
 			 */
-
-			// Use MD5 algorithm
-			MessageDigest md5Digest = MessageDigest.getInstance("MD5");
-
-			// Get the checksum
-			String checksum = fileChecksum(md5Digest, dataFiles[0]);
-			MD.putIfAbsent("checksum", new HashMap<Integer, String>());
-			MD.get("checksum").put(0, checksum);
-
-			// MD.put("checksum", checksum);
+	
+			long size = dataFiles[i].length();
+	
+			MD.putIfAbsent("size", new HashMap<Integer,String>());
+			MD.get("size").put(i,Long.toString(size));
+			// MD.put("size", Long.toString(size));
+	
+	
+			
+			// Do checksumming only if it is enabled in the config file
+			if (checksum) {
+				/*
+				 * 
+				 * Calculate the checksum
+				 * 
+				 */
+	
+				// Use MD5 algorithm
+				MessageDigest md5Digest = MessageDigest.getInstance("MD5");
+	
+				// Get the checksum
+				String checksum = fileChecksum(md5Digest, dataFiles[i]);
+				MD.putIfAbsent("checksum", new HashMap<Integer,String>());
+				MD.get("checksum").put(i,checksum);
+	
+				// MD.put("checksum", checksum);
+			}
 		}
 
 		return MD;
