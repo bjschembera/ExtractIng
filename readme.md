@@ -1,6 +1,6 @@
 # ExtractIng
 
-ExtractIng is a tool for the automated metadata extraction. It was developed for the extraction of simulation code outputs in high performance computing environments.
+ExtractIng is a tool for the automated metadata extraction. It was developed for the extraction of simulation code outputs in high performance computing environments / computational engineering. Please be aware that the tool is a prototypical implementation. It was developed to show which types of metadata are extractable. A high-level description of the tool and the outcomes of the research can be found in [3].
 
 Prerequisites
 -----
@@ -28,7 +28,7 @@ If there are problems with a newer version of Java, you can use the following pr
 Build
 -----
 
-To build the harvester:
+To build the extractor:
 
     mvn clean package
 
@@ -80,7 +80,7 @@ Usage
 
 ExtractIng is wrapped in script, which performs some preparatory tasks before runnig the extraction. The syntax of the script is as follows:
 
-    ./fdm.sh -c <configFile> -p <directoryToParse>|"<dir1> <dir2> ..." -m [scanner|spark] [-e <executorCores> 
+    ./fdm.sh -c <configFile> -p <directoryToParse>|"<dir1> <dir2> ..." -m [scanner|spark] [-e <executorCores>
 
 `<configFile>` should hold the location of the configuration file
 
@@ -93,9 +93,9 @@ ExtractIng is wrapped in script, which performs some preparatory tasks before ru
 Version History / Change Log
 -----
 
-March 20th 2020, v0.8 
+March 20th 2020, v0.8
 Initial relase of ExtractIng
- 
+
 September 2nd 2020, v0.82
 * Multiple data files can reside in the directory to parse
 * Syntax changes in the wrapper script
@@ -108,7 +108,7 @@ Development Roadmap
 
 Since this is a prototypical implementation, we try to continiously improve the code and add feature.
 
-Planned for 4Q2020:
+Planned:
 * Improved cutting function to capture values that are marshalled with leading and trailing characters, such as `key="value"`.
 
 
@@ -119,3 +119,5 @@ References
 [1] Schembera, Björn, and Dorothea Iglezakis. "The Genesis of EngMeta-A Metadata Model for Research Data in Computational Engineering." Research Conference on Metadata and Semantics Research. Springer, Cham, 2018. https://link.springer.com/chapter/10.1007/978-3-030-14401-2_12
 
 [2] https://www.izus.uni-stuttgart.de/fokus/engmeta/
+
+[3] Schembera, Björn. "Like a rainbow in the dark: metadata annotation for HPC applications in the age of dark data." The Journal of Supercomputing (2021): 1-21. https://link.springer.com/article/10.1007/s11227-020-03602-6
