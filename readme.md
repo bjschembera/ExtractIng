@@ -1,3 +1,6 @@
+# There is a follow up project now on https://github.com/MaRDI4NFDI/MetaExtractIng
+
+
 # ExtractIng
 
 ExtractIng is a tool for the automated metadata extraction. It was developed for the extraction of simulation code outputs in high performance computing environments / computational engineering. Please be aware that the tool is a prototypical implementation. It was developed to show which types of metadata are extractable. A high-level description of the tool and the outcomes of the research can be found in [3].
